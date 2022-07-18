@@ -3,7 +3,6 @@ const Accounts = require('./accounts-model')
 const { checkAccountPayload, checkAccountId, checkAccountNameUnique } = require('./accounts-middleware');
 
 router.get('/', async (req, res, next) => {
-  // DO YOUR MAGIC
   try {
     const accounts = await Accounts.getAll()
     res.json(accounts)
@@ -14,12 +13,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', checkAccountId, async (req, res, next) => {
   // DO YOUR MAGIC
-  try {
-    const account = await Accounts.getById(req.params.id)
-    res.json(account)
-  } catch (err) {
-    next(err)
-  }
+  res.json(req.account)
 })
 
 router.post('/', (req, res, next) => {
