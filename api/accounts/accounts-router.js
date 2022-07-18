@@ -16,16 +16,17 @@ router.get('/:id', checkAccountId, async (req, res, next) => {
   res.json(req.account)
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAccountPayload, checkAccountNameUnique, async (req, res, next) => {
   // DO YOUR MAGIC
   try {
-
+    const newAccount = await Accounts.create(req.body)
+    res.status(201).json(newAccount)
   } catch (err) {
     next(err)
   }
 })
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   // DO YOUR MAGIC
   try {
 
@@ -34,7 +35,7 @@ router.put('/:id', (req, res, next) => {
   }
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   // DO YOUR MAGIC
   try {
 
